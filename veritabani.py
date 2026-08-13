@@ -53,3 +53,17 @@ def okundu_yap(kitap_id):
     baglanti.commit()
     cursor.close()
     baglanti.close()
+    
+def kitap_sil(kitap_id):
+    baglanti = baglan()
+    cursor = baglanti.cursor()
+    
+    cursor.execute(
+    """
+    DELETE FROM kitaplar WHERE id = %s
+    """,
+    (kitap_id,))
+    
+    baglanti.commit()
+    cursor.close()
+    baglanti.close()

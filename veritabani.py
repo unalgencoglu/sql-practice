@@ -67,3 +67,25 @@ def kitap_sil(kitap_id):
     baglanti.commit()
     cursor.close()
     baglanti.close()
+    
+def sayfa_uzeri(limit):
+    baglanti = baglan()
+    cursor = baglanti.cursor()
+    
+    cursor.execute(
+    """
+    SELECT ad FROM kitaplar WHERE sayfa > %s
+    """,
+    (limit,))
+    
+    sonuc = cursor.fetchall()
+    cursor.close()
+    baglanti.close()
+    return sonuc
+
+if __name__ == "__main__":
+    kitap_ekle("Suç ve Ceza", "Dostoyevski", 687)
+    kitap_ekle("Kürk Mantolu Madonna", "Sabahattin Ali", 160)
+    okundu_yap(1)
+    print(kitaplari_listele())
+    print(sayfa_uzeri(300))

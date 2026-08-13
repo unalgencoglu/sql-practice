@@ -39,3 +39,17 @@ def kitaplari_listele():
     cursor.close()
     baglanti.close()
     return sonuc
+
+def okundu_yap(kitap_id):
+    baglanti = baglan()
+    cursor = baglanti.cursor()
+    
+    cursor.execute(
+    """
+    UPDATE kitaplar SET okundu = True WHERE id = %s
+    """,
+    (kitap_id,))
+    
+    baglanti.commit()
+    cursor.close()
+    baglanti.close()
